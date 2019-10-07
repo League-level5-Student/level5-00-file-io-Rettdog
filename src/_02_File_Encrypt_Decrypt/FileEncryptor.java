@@ -12,21 +12,22 @@ public class FileEncryptor {
 	// an encrypted form of the message to a file
 	
 	public static void main(String[] args) {
-		String key = "zyxwvutsrqponmlkjihefgdcba";
+		String    key = "zyxwvutsrqponmlkjihefgdcba ";
+		String normal = "abcdefghijklmnopqrstuvwxyz ";
 		String word = JOptionPane.showInputDialog("Give me a message to encrypt");
 		String out = "";
-		File file = new File("src/_02_File_Encrypt_Decrypt");
 		try {
+			File file = new File("src/_02_File_Encrypt_Decrypt/text.txt");
 			FileWriter fw = new FileWriter(file);
 			
 			for(int i = 0;i<word.length();i++) {
-				for(int k = 0;k<key.length();k++) {
-					if(word.substring(i,i+1).equals(key.substring(k, k+1))) {
+				for(int k = 0;k<normal.length();k++) {
+					if(word.substring(i,i+1).equalsIgnoreCase(normal.substring(k, k+1))) {
 						out+=key.substring(k,k+1);
 					}
 				}
 			}
-			
+			fw.write(" ");
 			fw.write(out);
 			fw.close();
 		} catch (IOException e) {
